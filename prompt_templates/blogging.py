@@ -1,8 +1,3 @@
-twitter_thread_generator_prompt = """Act as if you're a social media expert.
-Give me a 10 tweet thread about [{topic}].
-The thread should be optimised for virality and contain hashtags and emoticons.
-Each tweet should not exceed 280 characters in length."""
-
 blog_bullet_summary_prompt = """\
 In the following input, I am going to give you a text you should summarize 
 for me a bullet points format.

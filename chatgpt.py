@@ -1,6 +1,6 @@
 import helpers
 import llm
-import prompts
+from prompt_templates import blogging
 
 token_count = 1000
 
@@ -8,7 +8,7 @@ costs = helpers.estimate_input_cost("gpt-3.5-turbo-0613", token_count)
 
 print(f"Costs: {costs}")
 
-prompt = prompts.twitter_thread_generator_prompt.format(topic="prompt engineering tips")
+prompt = blogging.twitter_thread_generator_prompt.format(topic="prompt engineering tips")
 
 print(prompt)
 
