@@ -1,6 +1,6 @@
 import helpers
 import llm
-from prompt_templates import blogging, productivity_prompts
+from prompt_templates import blogging, productivity_prompts, text_analysis
 
 selected_model = "gpt-3.5-turbo"
 input_text = ""
