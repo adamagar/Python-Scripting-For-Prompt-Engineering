@@ -1,19 +1,24 @@
 import helpers
 import llm
-from prompt_templates import blogging
+from prompt_templates import blogging, productivity_prompts
 
-token_count = 1000
+selected_model = "gpt-3.5-turbo"
+input_text = ""
 
-costs = helpers.estimate_input_cost("gpt-3.5-turbo-0613", token_count)
+prompt = productivity_prompts.summarize_text_to_bullet_points.format(
+    Minimum="5", Maximum="10", Text=input_text
+)
 
-print(f"Costs: {costs}")
+token_count = helpers.count_tokens(prompt, selected_model)
+estimated_costs = helpers.estimate_input_cost(selected_model, token_count)
+print(f"Costs: {estimated_costs}")
 
-prompt = blogging.twitter_thread_generator_prompt.format(topic="prompt engineering tips")
+# prompt = blogging.twitter_thread_generator_prompt.format(topic="prompt engineering tips")
+# print(prompt)
 
-print(prompt)
+response = llm.llm_generate_text(prompt, "OpenAI", selected_model)
 
-response = llm.llm_generate_text(prompt, "OpenAI", "gpt-3.5-turbo")
-
+print("Result:")
 print(response)
 
 num_tokens = helpers.count_tokens(prompt, "gpt-3.5-turbo")
