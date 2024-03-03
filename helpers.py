@@ -1,5 +1,7 @@
 import tiktoken
 import newspaper
+import re
+from youtube_transcript_api import YouTubeTranscriptApi
 
 def estimate_input_cost(model_name, token_count):
     # Mapping of model names to their cost per 1000 tokens
@@ -41,3 +43,22 @@ def get_article_from_url(url):
         print("An error occurred while processing the URL:", url)
         print(str(e))
         return None
+
+def get_video_transcript(video_url, language='en'):
+    match = re.search(r"(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)", video_url)
+    if match:
+        video_id = match.group(1)
+    else:
+        raise ValueError("Invalid YouTube URL")
+    
+    try:
+        # Fetch the transcript using the YouTubeTranscriptApi
+        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=[language])
+    except Exception as e:
+        # Handle cases where the transcript isn't found or another error occurs
+        print(f"An error occurred: {e}")
+        return None
+
+    # Extract the text of the transcript
+    transcript_text = " ".join([line["text"] for line in transcript])
+    return transcript_text
