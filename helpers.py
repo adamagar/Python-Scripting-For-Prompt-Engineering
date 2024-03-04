@@ -45,7 +45,7 @@ def get_article_from_url(url):
         print(str(e))
         return None
 
-def get_video_transcript(video_url, language='en'):
+def get_video_transcript(video_url, language='tr'):
     match = re.search(r"(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)", video_url)
     if match:
         video_id = match.group(1)
