@@ -2,6 +2,7 @@ import tiktoken
 import newspaper
 import re
 from youtube_transcript_api import YouTubeTranscriptApi
+from langchain.text_splitter import TokenTextSplitter
 
 def estimate_input_cost(model_name, token_count):
     # Mapping of model names to their cost per 1000 tokens
@@ -62,3 +63,10 @@ def get_video_transcript(video_url, language='en'):
     # Extract the text of the transcript
     transcript_text = " ".join([line["text"] for line in transcript])
     return transcript_text
+
+def split_text_into_chunks(text, max_tokens):
+    text_splitter = TokenTextSplitter(chunk_size=max_tokens, chunk_overlap=0)
+    chunks = text_splitter.split_text(text)
+    return chunks
+
+max_tokens_per_chunk = 1000
