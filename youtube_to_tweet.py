@@ -4,7 +4,7 @@ from prompt_templates import youtube_prompts
 
 selected_model = "gpt-3.5-turbo"
 
-youtube_url = "https://www.youtube.com/watch?v=tXQD9VKVmVM"
+youtube_url = "https://www.youtube.com/watch?v=_PV_SBFJS74"
 
 video_transcript = helpers.get_video_transcript(youtube_url, language="tr")
 
